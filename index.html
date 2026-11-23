@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>スライド型録 — PowerPointテンプレートギャラリー</title>
+<meta name="description" content="選んで、整えて、編集できる.pptxでダウンロード。ブラウザだけで使えるPowerPointテンプレートギャラリー。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+<style>
+:root{
+  --ink:#16181d;--ink2:#5d6470;--line:#e4e6eb;--bg:#f6f7f9;--card:#fff;
+  --brand:#7c3aed;--brand2:#06b6d4;--radius:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:"Noto Sans JP","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer}
+a{color:inherit}
+
+/* ---------- header ---------- */
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .in{max-width:1320px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:12px 20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;white-space:nowrap}
+.logo i{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;color:#fff;font-style:normal;font-size:15px}
+.logo small{font-weight:400;color:var(--ink2);font-size:12px}
+.search{flex:1;max-width:560px;position:relative}
+.search input{width:100%;height:42px;border-radius:999px;border:1px solid var(--line);background:#f1f2f5;padding:0 16px 0 42px;font:inherit;font-size:14px;outline:none;transition:.2s}
+.search input:focus{background:#fff;border-color:var(--brand);box-shadow:0 0 0 4px rgba(124,58,237,.12)}
+.search svg{position:absolute;left:14px;top:11px;width:20px;height:20px;color:var(--ink2)}
+.favbtn{margin-left:auto;border:1px solid var(--line);background:#fff;border-radius:999px;height:38px;padding:0 14px;display:flex;align-items:center;gap:6px;font-size:13px;white-space:nowrap}
+.favbtn.on{background:#fff0f4;border-color:#f9a8c0;color:#be185d}
+
+/* ---------- hero ---------- */
+.hero{max-width:1320px;margin:0 auto;padding:36px 20px 8px}
+.hero h1{font-size:clamp(24px,3.4vw,38px);margin:0 0 8px;letter-spacing:.02em}
+.hero h1 span{background:linear-gradient(90deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{margin:0;color:var(--ink2);font-size:14px;line-height:1.7}
+.stats{display:flex;gap:18px;margin-top:14px;flex-wrap:wrap}
+.stats b{font-size:20px}
+.stats div{font-size:12px;color:var(--ink2)}
+
+/* ---------- filters ---------- */
+.filters{max-width:1320px;margin:0 auto;padding:18px 20px 6px}
+.row{display:flex;align-items:center;gap:8px;margin-bottom:10px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.row::-webkit-scrollbar{display:none}
+.row .lab{font-size:12px;color:var(--ink2);min-width:56px;flex:none}
+.chip{flex:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font-size:13px;transition:.15s;white-space:nowrap}
+.chip:hover{border-color:#c9ccd4}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.dot{flex:none;width:28px;height:28px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line);transition:.15s}
+.dot.on{box-shadow:0 0 0 2px var(--ink)}
+.dot.all{background:conic-gradient(#ef4444,#f59e0b,#84cc16,#14b8a6,#3b82f6,#8b5cf6,#ec4899,#ef4444)}
+.bar{max-width:1320px;margin:0 auto;padding:4px 20px 10px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--ink2)}
+.bar select{font:inherit;font-size:13px;border:1px solid var(--line);border-radius:8px;padding:6px 8px;background:#fff}
+
+/* ---------- grid ---------- */
+.grid{max-width:1320px;margin:0 auto;padding:6px 20px 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:22px}
+.card{background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s;cursor:pointer;position:relative}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(20,20,40,.12)}
+.card .thumb{position:relative;background:#eee}
+.card .thumb .slide{border-radius:0}
+.card .thumb .alt{position:absolute;inset:0;opacity:0;transition:opacity .35s}
+.card:hover .thumb .alt{opacity:1}
+.card .meta{padding:11px 14px 13px}
+.card .name{font-weight:700;font-size:14px;margin-bottom:5px}
+.card .tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:11px;color:var(--ink2);background:#f1f2f5;border-radius:6px;padding:2px 7px}
+.tag.cat{background:#efe9fd;color:#5b21b6}
+.heart{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:50%;border:none;background:rgba(255,255,255,.92);display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.15);z-index:2;opacity:0;transition:.2s}
+.card:hover .heart,.heart.on{opacity:1}
+.heart svg{width:18px;height:18px}
+.heart.on svg{fill:#e11d48;stroke:#e11d48}
+.badge{position:absolute;left:8px;bottom:8px;z-index:2;background:rgba(0,0,0,.62);color:#fff;font-size:11px;border-radius:6px;padding:3px 7px;opacity:0;transition:.2s}
+.card:hover .badge{opacity:1}
+.empty{grid-column:1/-1;text-align:center;color:var(--ink2);padding:60px 0}
+
+/* ---------- slide renderer ---------- */
+.slide{position:relative;width:100%;aspect-ratio:16/9;container-type:inline-size;overflow:hidden;border-radius:6px}
+.slide .el{position:absolute;box-sizing:border-box}
+.slide .tx{display:flex;flex-direction:column;line-height:1.25;white-space:normal;word-break:break-all;overflow-wrap:anywhere}
+.slide .tx span{display:block}
+
+/* ---------- modal ---------- */
+.modal{position:fixed;inset:0;z-index:50;background:rgba(15,17,25,.55);display:none;align-items:center;justify-content:center;padding:20px}
+.modal.open{display:flex}
+.dlg{background:#fff;border-radius:18px;width:min(1280px,100%);height:min(860px,100%);display:grid;grid-template-columns:1fr 330px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.stage{display:flex;flex-direction:column;min-width:0;background:#eef0f4}
+.stage .head{display:flex;align-items:center;gap:10px;padding:14px 18px;background:#fff;border-bottom:1px solid var(--line)}
+.stage .head h2{font-size:17px;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stage .head .x{margin-left:auto;border:none;background:#f1f2f5;width:34px;height:34px;border-radius:50%;font-size:18px;flex:none}
+.big{flex:1;display:flex;align-items:center;justify-content:center;padding:22px;min-height:0}
+.big .wrap{width:100%;max-width:min(100%,calc((100vh - 330px) * 16 / 9));position:relative}
+.big .slide{box-shadow:0 10px 30px rgba(0,0,0,.18);border-radius:4px}
+.nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:none;background:rgba(255,255,255,.95);box-shadow:0 2px 8px rgba(0,0,0,.2);font-size:18px}
+.nav.l{left:-14px}.nav.r{right:-14px}
+.strip{display:flex;gap:10px;overflow-x:auto;padding:12px 18px 16px;background:#fff;border-top:1px solid var(--line)}
+.th{flex:none;width:150px;cursor:pointer}
+.th .slide{border-radius:4px;outline:2px solid transparent;outline-offset:2px;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.th.cur .slide{outline-color:var(--brand)}
+.th.off .slide{opacity:.35}
+.th .cap{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink2);margin-top:6px}
+.th .cap input{margin:0;accent-color:var(--brand)}
+.side{border-left:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
+.side .scroll{flex:1;overflow-y:auto;padding:18px}
+.side h3{font-size:12px;color:var(--ink2);margin:18px 0 8px;font-weight:700;letter-spacing:.04em}
+.side h3:first-child{margin-top:0}
+.field{margin-bottom:9px}
+.field label{display:block;font-size:11px;color:var(--ink2);margin-bottom:3px}
+.field input{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit;font-size:13px;outline:none}
+.field input:focus{border-color:var(--brand)}
+.pals{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.pal{border:2px solid transparent;border-radius:10px;padding:4px;background:#f6f7f9;display:flex;flex-direction:column;align-items:center;gap:3px}
+.pal.on{border-color:var(--ink)}
+.pal .sw{display:flex;width:100%;height:20px;border-radius:6px;overflow:hidden}
+.pal .sw i{flex:1}
+.pal span{font-size:10px;color:var(--ink2)}
+.fonts{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.fonts button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:8px 6px;font-size:12px}
+.fonts button.on{border-color:var(--ink);background:var(--ink);color:#fff}
+.selrow{display:flex;gap:6px}
+.selrow button{flex:1;border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px;font-size:12px}
+.side .foot{padding:14px 18px;border-top:1px solid var(--line);background:#fff}
+.dl{width:100%;height:48px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--brand),#6d28d9);color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 16px rgba(124,58,237,.35)}
+.dl:disabled{opacity:.5;cursor:default}
+.note{font-size:11px;color:var(--ink2);line-height:1.6;margin-top:8px}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:11px 18px;border-radius:10px;font-size:13px;opacity:0;transition:.25s;z-index:80;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%)}
+footer{text-align:center;color:var(--ink2);font-size:12px;padding:20px 20px 40px}
+
+@media (max-width:900px){
+  .modal{padding:0}
+  .dlg{grid-template-columns:1fr;grid-template-rows:auto auto;height:100%;border-radius:0;overflow-y:auto;display:block}
+  .big .wrap{max-width:100%}
+  .side{border-left:none;border-top:1px solid var(--line)}
+  .side .foot{position:sticky;bottom:0}
+  .nav.l{left:4px}.nav.r{right:4px}
+  .th{width:120px}
+  .logo small{display:none}
+  .top .in{gap:10px;padding:10px 14px}
+  .favbtn span{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="in">
+  <div class="logo"><i>型</i><div>スライド型録<br><small>PowerPoint Template Gallery</small></div></div>
+  <label class="search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="q" type="search" placeholder="テンプレートを検索（例：企画書、ダーク、和風）">
+  </label>
+  <button class="favbtn" id="favOnly"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.1 0 3.6 1.2 5.2 3 1.6-1.8 3.1-3 5.2-3 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg><span>お気に入り</span> <b id="favCount">0</b></button>
+</div></header>
+
+<section class="hero">
+  <h1>選んで、整えて、<span>編集できる.pptx</span>に。</h1>
+  <p>テンプレートを選んで、色・フォント・表紙の文字を変えてダウンロード。図形・テキスト・グラフ・表はすべてPowerPoint上で編集できます。ブラウザだけで動き、データは外部に送信しません。</p>
+  <div class="stats" id="stats"></div>
+</section>
+
+<section class="filters">
+  <div class="row" id="catRow"><span class="lab">用途</span></div>
+  <div class="row" id="tasteRow"><span class="lab">テイスト</span></div>
+  <div class="row" id="colorRow"><span class="lab">カラー</span></div>
+</section>
+<div class="bar"><span id="count"></span>
+  <label>並び順 <select id="sort"><option value="rec">おすすめ順</option><option value="name">名前順</option><option value="cat">用途順</option></select></label>
+</div>
+<main class="grid" id="grid"></main>
+<footer>スライド型録 — すべてのテンプレートは自由に編集・利用できます。フォントは閲覧環境のPowerPointにインストールされたものが使われます。</footer>
+
+<div class="modal" id="modal">
+  <div class="dlg">
+    <div class="stage">
+      <div class="head"><h2 id="mTitle"></h2><span class="tag cat" id="mCat"></span><button class="x" id="mClose" aria-label="閉じる">×</button></div>
+      <div class="big"><div class="wrap"><div id="bigSlide"></div><button class="nav l" id="prev">‹</button><button class="nav r" id="next">›</button></div></div>
+      <div class="strip" id="strip"></div>
+    </div>
+    <aside class="side">
+      <div class="scroll">
+        <h3>表紙・結びの文字</h3>
+        <div class="field"><label>タイトル</label><input id="fTitle"></div>
+        <div class="field"><label>サブタイトル</label><input id="fSub"></div>
+        <div class="field"><label>会社名・発表者</label><input id="fMeta"></div>
+        <div class="field"><label>日付</label><input id="fDate"></div>
+        <h3>カラー</h3>
+        <div class="pals" id="pals"></div>
+        <h3>フォント</h3>
+        <div class="fonts" id="fonts"></div>
+        <h3>収録するスライド</h3>
+        <div class="selrow"><button id="selAll">すべて選択</button><button id="selNone">すべて解除</button></div>
+        <p class="note">下のサムネイルのチェックで個別に選べます。各スライドには発表者メモ欄も入ります。</p>
+      </div>
+      <div class="foot">
+        <button class="dl" id="dl"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></svg><span id="dlLabel">.pptxをダウンロード</span></button>
+        <p class="note">16:9（ワイド）/ 図形・テキスト・グラフ・表はすべて編集可能</p>
+      </div>
+    </aside>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   基本設定
+   ========================================================= */
+const W = 13.333, H = 7.5;                 // LAYOUT_WIDE（インチ）
+const PT = 100 / (72 * W);                 // pt → cqw 換算
+
+const FONTS = {
+  yugo:  {label:'游ゴシック',     ppt:'Yu Gothic',     css:'"Yu Gothic","YuGothic","Hiragino Sans","Noto Sans JP",sans-serif'},
+  meiryo:{label:'メイリオ',       ppt:'Meiryo',        css:'Meiryo,"Hiragino Sans","Noto Sans JP",sans-serif'},
+  bizud: {label:'BIZ UDPゴシック',ppt:'BIZ UDPGothic', css:'"BIZ UDPGothic","Hiragino Sans","Noto Sans JP",sans-serif'},
+  yumin: {label:'游明朝',         ppt:'Yu Mincho',     css:'"Yu Mincho","YuMincho","Hiragino Mincho ProN","Noto Serif JP",serif'},
+};
+const FONT_SETS = {
+  gothic:{label:'游ゴシック',       h:'yugo',  b:'yugo'},
+  meiryo:{label:'メイリオ',         h:'meiryo',b:'meiryo'},
+  ud:    {label:'BIZ UDゴシック',   h:'bizud', b:'bizud'},
+  mincho:{label:'明朝×ゴシック',    h:'yumin', b:'yugo'},
+};
+
+/* パレット：bg 背景 / sf 面 / tx 文字 / sb 補助文字 / pr メイン / ac アクセント / a2 淡色 / op メイン上の文字 */
+const PALETTES = {
+  navy:     {n:'ネイビー',   g:'blue',  bg:'FFFFFF',sf:'EEF2F8',tx:'1B2433',sb:'5B6474',pr:'1F3A6B',ac:'2F80ED',a2:'A9C7F5',op:'FFFFFF'},
+  sky:      {n:'スカイ',     g:'blue',  bg:'FFFFFF',sf:'EAF6FC',tx:'1A2B3C',sb:'5A6B7C',pr:'0284C7',ac:'38BDF8',a2:'BAE6FD',op:'FFFFFF'},
+  forest:   {n:'フォレスト', g:'green', bg:'FFFFFF',sf:'EEF5F0',tx:'1F2A24',sb:'5B6B60',pr:'1F6F4A',ac:'4CAF7A',a2:'B7DFC7',op:'FFFFFF'},
+  mint:     {n:'ミント',     g:'green', bg:'FAFFFD',sf:'E3F6EF',tx:'17332B',sb:'557068',pr:'0F9488',ac:'2DD4BF',a2:'A7F3E4',op:'FFFFFF'},
+  crimson:  {n:'クリムゾン', g:'red',   bg:'FFFFFF',sf:'FBEFEF',tx:'2A1A1A',sb:'6B5555',pr:'B91C1C',ac:'EF4444',a2:'FCC5C5',op:'FFFFFF'},
+  sunset:   {n:'サンセット', g:'orange',bg:'FFFDF9',sf:'FFF1E6',tx:'2D1F14',sb:'6E5A4A',pr:'EA580C',ac:'F59E0B',a2:'FED7AA',op:'FFFFFF'},
+  lavender: {n:'ラベンダー', g:'purple',bg:'FFFFFF',sf:'F3F0FB',tx:'231C33',sb:'625A75',pr:'6D28D9',ac:'A78BFA',a2:'DDD6FE',op:'FFFFFF'},
+  sakura:   {n:'さくら',     g:'pink',  bg:'FFFAFB',sf:'FCE7EF',tx:'3A2230',sb:'7A5A68',pr:'DB2777',ac:'F472B6',a2:'FBCFE8',op:'FFFFFF'},
+  lemon:    {n:'レモン',     g:'yellow',bg:'FFFEF5',sf:'FEF7CD',tx:'292518',sb:'6B6450',pr:'B45309',ac:'EAB308',a2:'FDE68A',op:'FFFFFF'},
+  mocha:    {n:'モカ',       g:'brown', bg:'FBF8F4',sf:'F1EAE1',tx:'2E241C',sb:'6F6255',pr:'7C5A3A',ac:'B08968',a2:'DDCAB4',op:'FFFFFF'},
+  mono:     {n:'モノクロ',   g:'mono',  bg:'FFFFFF',sf:'F2F2F2',tx:'111111',sb:'666666',pr:'111111',ac:'555555',a2:'C8C8C8',op:'FFFFFF'},
+  midnight: {n:'ミッドナイト',g:'dark', bg:'0F172A',sf:'1E293B',tx:'F1F5F9',sb:'94A3B8',pr:'38BDF8',ac:'22D3EE',a2:'334155',op:'0F172A'},
+  neon:     {n:'ネオン',     g:'dark',  bg:'0B0B12',sf:'1A1A2A',tx:'F5F5FF',sb:'9A9AB5',pr:'A3E635',ac:'F472B6',a2:'2E2E48',op:'0B0B12'},
+  beni:     {n:'和紅',       g:'red',   bg:'F7F3EA',sf:'EFE7D6',tx:'2B2420',sb:'6E6258',pr:'A8312B',ac:'2E4A62',a2:'D9C9A3',op:'FFFFFF'},
+  ai:       {n:'藍',         g:'blue',  bg:'F5F3EE',sf:'E8E4DA',tx:'1E2530',sb:'5E6470',pr:'233D6B',ac:'8C6E3C',a2:'C9BB98',op:'FFFFFF'},
+  champagne:{n:'シャンパン', g:'brown', bg:'FCFBF8',sf:'F3EFE6',tx:'2A2723',sb:'77706A',pr:'1F2937',ac:'B08D57',a2:'E2D3B5',op:'FFFFFF'},
+};
+const COLOR_GROUPS = [
+  ['blue','青','#2f80ed'],['green','緑','#1f9d63'],['red','赤','#d83a3a'],['orange','オレンジ','#f97316'],
+  ['yellow','黄','#eab308'],['purple','紫','#7c3aed'],['pink','ピンク','#ec4899'],['brown','ブラウン','#9a7350'],
+  ['mono','モノクロ','#222'],['dark','ダーク','#0f172a'],
+];
+
+/* =========================================================
+   要素コンストラクタ（座標はすべてインチ）
+   ========================================================= */
+const R  = (x,y,w,h,fill,o={}) => ({t:'rect',x,y,w,h,fill,...o});
+const E  = (x,y,w,h,fill,o={}) => ({t:'ellipse',x,y,w,h,fill,...o});
+const T  = (x,y,w,h,text,o={}) => ({t:'text',x,y,w,h,text,size:16,color:'000000',align:'left',valign:'top',font:'b',...o});
+const S2T = (s,text,o={}) => T(s.x,s.y,s.w,s.h,text,{size:s.size,color:s.color,align:s.align||'left',valign:s.valign||'top',bold:s.bold!==undefined?s.bold:true,font:s.font||'h',...o});
+
+/* =========================================================
+   スライド種別
+   ========================================================= */
+const KINDS = [
+  ['cover','表紙'],['agenda','目次'],['section','中扉'],['bullets','要点'],['twocol','テキスト＋画像'],
+  ['kpi','数値ハイライト'],['timeline','タイムライン'],['compare','3カラム比較'],['chart','グラフ'],['table','表'],['closing','結び'],
+];
+const COVERISH = {cover:1,section:1,closing:1};
+
+function defaults(k,P){
+  if(k==='cover')   return {title:{x:.9,y:1.6,w:11.5,h:2.5,size:44,color:P.tx,valign:'bottom'},sub:{x:.9,y:4.45,w:11.5,h:.8,size:20,color:P.sb,bold:false,font:'b'},meta:{x:.9,y:6.15,w:11.5,h:.5,size:14,color:P.sb,bold:false,font:'b'}};
+  if(k==='closing') return {title:{x:1,y:2.0,w:11.33,h:1.9,size:40,color:P.tx,align:'center',valign:'bottom'},sub:{x:1,y:4.45,w:11.33,h:.7,size:18,color:P.sb,align:'center',bold:false,font:'b'},meta:{x:1,y:6.15,w:11.33,h:.5,size:13,color:P.sb,align:'center',bold:false,font:'b'}};
+  if(k==='section') return {num:{x:.9,y:1.5,w:6,h:1.6,size:72,color:P.pr,valign:'bottom'},title:{x:.9,y:3.25,w:11.5,h:1.1,size:40,color:P.tx,valign:'middle'},sub:{x:.9,y:4.4,w:11.5,h:.6,size:18,color:P.sb,bold:false,font:'b'}};
+  return {title:{x:.7,y:.4,w:11.9,h:.95,size:28,color:P.tx,valign:'middle'},body:{x:.7,y:1.7,w:11.93,h:5.2},page:{x:11.6,y:6.98,w:1.03,h:.35,size:10,color:P.sb,align:'right',bold:false,font:'b'}};
+}
+const kan = n => ['〇','一','二','三','四','五','六','七','八','九','十'][n] || String(n);
+
+/* =========================================================
+   スタイル（装飾と文字配置）
+   各関数は {els:[装飾], title/sub/meta/num/body/page スロット, r:角丸} を返す
+   ========================================================= */
+const STYLES = {
+  minimal(k,P){
+    const s=defaults(k,P),els=[];s.r=.08;
+    if(k==='cover') els.push(R(.9,4.25,1.2,.07,P.pr));
+    else if(k==='section') els.push(R(.9,3.2,.9,.06,P.ac));
+    else if(k==='closing') els.push(R(W/2-.6,4.2,1.2,.07,P.pr));
+    else els.push(R(.7,1.36,.8,.06,P.pr));
+    return {...s,els};
+  },
+  band(k,P){
+    const s=defaults(k,P),els=[];s.r=.06;
+    if(k==='cover'){
+      els.push(R(0,0,.55,H,P.pr),R(.55,0,.12,H,P.ac),R(1.4,4.3,1.6,.06,P.ac));
+      for(const key of ['title','sub','meta']){s[key].x=1.4;s[key].w=11.2}
+    }else if(k==='section'||k==='closing'){
+      els.push(R(0,0,W,H,P.pr),R(0,H-.25,W,.25,P.ac));
+      s.title.color=P.op;s.sub.color=P.op;if(s.num)s.num.color=P.op;if(s.meta)s.meta.color=P.op;
+      if(k==='section')els.push(R(.9,3.18,1.2,.05,P.op,{alpha:40}));
+    }else{
+      els.push(R(0,0,W,1.25,P.pr),R(0,1.25,W,.06,P.ac));
+      s.title.y=.15;s.title.color=P.op;s.body.y=1.75;
+    }
+    return {...s,els};
+  },
+  circles(k,P){
+    const s=defaults(k,P),els=[];s.r=.2;
+    if(k==='cover'){
+      els.push(E(8.4,-1.8,7.2,7.2,P.pr),E(10.9,4.3,3.6,3.6,P.ac,{alpha:25}),E(7.5,5.4,1.2,1.2,P.a2));
+      s.title.w=7.2;s.sub.w=7;s.meta.w=7;
+    }else if(k==='section'){
+      els.push(E(8.6,1.0,5.6,5.6,P.pr),E(7.7,4.8,2.2,2.2,P.ac,{alpha:30}),E(12.1,.4,.8,.8,P.a2));
+      s.title.w=7.2;s.sub.w=7;
+    }else if(k==='closing'){
+      els.push(E(-1.6,-1.6,4.6,4.6,P.pr),E(10.4,4.4,4.6,4.6,P.ac,{alpha:30}),E(2.6,5.8,.7,.7,P.a2));
+    }else{
+      els.push(E(12.2,-.9,2,2,P.pr),E(11.6,.55,.7,.7,P.ac,{alpha:30}));
+      s.title.w=10.8;
+    }
+    return {...s,els};
+  },
+  split(k,P){
+    const s=defaults(k,P),els=[];s.r=0;
+    if(k==='cover'){
+      els.push(R(7.4,0,W-7.4,H,P.pr),E(8.4,1.25,5,5,undefined,{line:P.op,lw:1.5,alpha:0}),E(9.55,2.4,2.7,2.7,P.op,{alpha:80}),R(.9,4.3,1.2,.07,P.pr));
+      s.title.w=6.1;s.sub.w=6.1;s.meta.w=6.1;s.title.size=40;
+    }else if(k==='section'){
+      els.push(R(0,0,5,H,P.pr));
+      s.num={x:.6,y:2.3,w:3.8,h:1.8,size:88,color:P.op,align:'center',valign:'middle'};
+      s.title={x:5.8,y:2.4,w:6.9,h:1.3,size:38,color:P.tx,valign:'bottom'};
+      s.sub={x:5.8,y:3.85,w:6.9,h:.6,size:18,color:P.sb,bold:false,font:'b'};
+      els.push(R(5.8,3.75,.8,.05,P.ac));
+    }else if(k==='closing'){
+      els.push(R(0,0,W,H,P.pr),R(0,0,.28,H,P.ac));
+      s.title.color=P.op;s.sub.color=P.op;s.meta.color=P.op;
+    }else{
+      els.push(R(0,0,.28,H,P.pr),R(.28,0,.08,H,P.ac));
+      s.title.x=.85;s.body.x=.85;s.body.w=11.78;
+    }
+    return {...s,els};
+  },
+  tech(k,P){
+    const s=defaults(k,P),els=[];s.r=.04;
+    for(let i=1;i<10;i++)els.push(R(i*W/10,0,.008,H,P.ac,{alpha:88}));
+    for(let i=1;i<6;i++)els.push(R(0,i*H/6,W,.008,P.ac,{alpha:88}));
+    const br=(x,y,dx,dy)=>els.push(R(dx>0?x:x-.6,y,.6,.03,P.ac),R(x,dy>0?y:y-.6,.03,.6,P.ac));
+    br(.4,.4,1,1);br(W-.43,H-.43,-1,-1);
+    if(k==='cover'){
+      els.push(T(.9,1.2,6,.4,'// PRESENTATION',{size:12,color:P.ac,bold:true}),R(.9,4.3,2.2,.04,P.ac));
+    }else if(k==='section'){
+      s.num.color=P.ac;s.num.size=80;
+    }else if(k==='closing'){
+      els.push(R(W/2-1.1,4.2,2.2,.04,P.ac));
+    }else{
+      els.push(R(.7,1.38,11.93,.015,P.ac,{alpha:40}));
+      s.title.y=.5;s.label=true;
+    }
+    return {...s,els};
+  },
+  pop(k,P){
+    const s=defaults(k,P),els=[];s.r=.28;
+    if(k==='cover'){
+      els.push(E(-1.3,-1.5,4.2,4.2,P.a2),E(10.4,4.3,4.4,4.4,P.ac,{alpha:15}),E(11.3,.7,1.2,1.2,P.pr),E(1.3,6.2,.6,.6,P.ac),E(9.6,5.9,.5,.5,P.pr,{alpha:40}));
+      s.title.x=1.2;s.sub.x=1.2;s.meta.x=1.2;s.title.w=10;
+      els.push(R(1.2,4.25,1.4,.14,P.pr,{r:.07}));
+    }else if(k==='section'){
+      els.push(R(0,0,W,H,P.sf),E(9.2,-1.4,5.6,5.6,P.a2),E(-1,4.8,3.6,3.6,P.ac,{alpha:20}),E(11.2,5.3,1,1,P.pr));
+      s.num.x=1.2;s.title.x=1.2;s.sub.x=1.2;
+    }else if(k==='closing'){
+      els.push(E(-1.2,-1.4,4,4,P.a2),E(10.6,4.4,4.2,4.2,P.ac,{alpha:15}),E(11.6,.8,.9,.9,P.pr),E(1.6,6.2,.6,.6,P.pr,{alpha:40}));
+    }else{
+      els.push(E(12.2,-.7,1.8,1.8,P.a2),E(-.6,6.6,1.5,1.5,P.ac,{alpha:25}),R(.7,1.36,.6,.14,P.pr,{r:.07}));
+      s.title.w=11.2;
+    }
+    return {...s,els};
+  },
+  corporate(k,P){
+    const s=defaults(k,P),els=[];s.r=.04;
+    if(k==='cover'||k==='closing'){
+      els.push(R(0,0,W,H,P.pr),R(0,5.7,W,1.8,P.bg),R(0,5.7,W,.08,P.ac));
+      s.title.color=P.op;s.sub.color=P.op;s.title.y=1.1;s.sub.y=3.85;
+      s.meta.y=6.3;s.meta.color=P.tx;
+    }else if(k==='section'){
+      els.push(R(0,0,W,H,P.sf),R(.9,1.75,.14,2.95,P.pr));
+      for(const key of ['num','title','sub'])s[key].x=1.35;
+      s.num.size=60;
+    }else{
+      els.push(R(.7,.55,.1,.65,P.pr),R(0,7.05,W,.45,P.pr));
+      s.title.x=.95;s.body.h=5.05;
+      s.page={x:11.6,y:7.05,w:1.03,h:.45,size:10,color:P.op,align:'right',valign:'middle',bold:false,font:'b'};
+      s.footer=true;
+    }
+    return {...s,els};
+  },
+  wa(k,P){
+    const s=defaults(k,P),els=[];s.r=0;
+    const rings=(cx,cy,n)=>{for(let i=0;i<n;i++){const r=.45+i*.42;els.push(E(cx-r,cy-r,r*2,r*2,undefined,{line:P.a2,lw:1.25}))}};
+    if(k==='cover'||k==='closing'){
+      els.push(R(11.7,0,.14,H,P.pr),R(11.95,0,.04,H,P.pr));
+      rings(9.6,7.4,5);rings(6.9,7.9,4);
+      if(k==='cover'){s.title.w=10;s.sub.w=10;s.meta.w=10;s.sub.y=4.7;els.push(R(.9,4.3,.22,.22,P.pr))}
+      else{for(const key of ['title','sub','meta']){s[key].x=.8;s[key].w=10.6}}
+    }else if(k==='section'){
+      els.push(R(0,0,W,H,P.sf),R(W-2.4,0,.08,H,P.pr));rings(11,7.6,5);
+      s.numText=n=>'第'+kan(n)+'章';s.num.size=28;s.num.h=.8;s.num.y=2.3;s.num.color=P.pr;
+    }else{
+      els.push(R(.7,1.33,11.93,.025,P.pr),R(.7,1.41,11.93,.01,P.pr),R(12.27,.62,.36,.36,P.pr));
+      s.title.w=11.2;
+    }
+    return {...s,els};
+  },
+  diagonal(k,P){
+    const s=defaults(k,P),els=[];s.r=.06;
+    if(k==='cover'){
+      els.push(R(8.9,-2.6,3.4,12.7,P.pr,{rot:20}),R(11.7,-2.6,1.1,12.7,P.ac,{rot:20,alpha:25}),R(8.1,-2.6,.22,12.7,P.a2,{rot:20}));
+      s.title.w=7.3;s.sub.w=7.1;s.meta.w=7.1;s.title.size=42;
+      els.push(R(.9,4.25,1.2,.07,P.ac));
+    }else if(k==='section'){
+      els.push(R(.4,-2.6,3.8,12.7,P.pr,{rot:15}),R(4.0,-2.6,.25,12.7,P.ac,{rot:15}));
+      s.num={x:.3,y:2.4,w:4,h:1.8,size:84,color:P.op,align:'center',valign:'middle'};
+      s.title={x:5.6,y:2.5,w:7.2,h:1.2,size:38,color:P.tx,valign:'bottom'};
+      s.sub={x:5.6,y:3.85,w:7.2,h:.6,size:18,color:P.sb,bold:false,font:'b'};
+    }else if(k==='closing'){
+      els.push(R(-1.4,-2.6,2.8,12.7,P.pr,{rot:20}),R(11.9,-2.6,2.8,12.7,P.pr,{rot:20}),R(11.2,-2.6,.3,12.7,P.ac,{rot:20}));
+    }else{
+      els.push(R(12.5,-1.2,.55,3.2,P.pr,{rot:20}),R(13.1,-1.2,.22,3.2,P.ac,{rot:20}));
+      s.title.w=11;
+    }
+    return {...s,els};
+  },
+  editorial(k,P){
+    const s=defaults(k,P),els=[];s.r=0;
+    if(k==='cover'){
+      els.push(R(.9,.7,11.53,.08,P.tx),T(.9,.9,8,.4,'PRESENTATION  /  '+new Date().getFullYear(),{size:12,color:P.sb,bold:true}),R(.9,5.95,11.53,.02,P.tx));
+      s.title.size=48;s.title.y=1.5;s.sub.y=4.3;s.meta.y=6.1;
+    }else if(k==='section'){
+      s.num={x:6.9,y:.5,w:5.6,h:3.2,size:150,color:P.a2,align:'right',valign:'bottom'};
+      s.title.y=3.9;s.sub.y=5.05;
+      els.push(R(.9,3.75,3,.07,P.tx));
+    }else if(k==='closing'){
+      els.push(R(.9,.7,11.53,.08,P.tx),R(.9,6.8,11.53,.02,P.tx));
+    }else{
+      els.push(R(.7,.42,11.93,.045,P.tx),R(.7,1.42,11.93,.012,P.sb));
+      s.title.y=.5;
+      s.page={x:5.67,y:6.98,w:2,h:.35,size:10,color:P.sb,align:'center',bold:false,font:'b'};s.pageFmt=n=>'— '+String(n).padStart(2,'0')+' —';
+    }
+    return {...s,els};
+  },
+  frame(k,P){
+    const s=defaults(k,P),els=[];s.r=0;
+    els.push(R(.35,.35,W-.7,H-.7,undefined,{line:P.pr,lw:1.5}));
+    for(const [x,y] of [[.35,.35],[W-.35,.35],[.35,H-.35],[W-.35,H-.35]])els.push(R(x-.1,y-.1,.2,.2,P.ac));
+    if(k==='cover'){
+      for(const key of ['title','sub','meta']){s[key].align='center';s[key].x=1;s[key].w=11.33}
+      s.title.y=1.4;s.meta.y=5.9;els.push(R(W/2-.5,4.25,1,.05,P.ac));
+    }else if(k==='section'){
+      for(const key of ['num','title','sub']){s[key].align='center';s[key].x=1;s[key].w=11.33}
+      s.num.size=60;
+    }else if(k==='closing'){
+      s.meta.y=5.9;els.push(R(W/2-.5,4.2,1,.05,P.ac));
+    }else{
+      s.title={...s.title,x:.9,y:.6,w:11.5};s.body={x:.9,y:1.9,w:11.53,h:4.85};
+      els.push(R(.9,1.55,1,.05,P.ac));
+      s.page={...s.page,x:11.4,y:6.7};
+    }
+    return {...s,els};
+  },
+  card(k,P){
+    const s=defaults(k,P),els=[];s.r=.22;
+    els.push(R(0,0,W,H,P.sf),R(.4,.4,W-.8,H-.8,P.bg,{r:.35}));
+    if(k==='cover'){
+      els.push(E(.85,.8,.2,.2,P.pr),E(1.15,.8,.2,.2,P.ac),E(1.45,.8,.2,.2,P.a2),E(9.3,2.6,3.4,3.4,P.a2,{alpha:30}),E(10.6,1.7,1.4,1.4,P.pr,{alpha:10}),R(1.2,4.25,1.2,.12,P.pr,{r:.06}));
+      for(const key of ['title','sub','meta']){s[key].x=1.2;s[key].w=8.6}
+      s.meta.y=5.9;
+    }else if(k==='section'){
+      els.push(R(1.2,2.55,1.9,1.15,P.pr,{r:.57}));
+      s.num={x:1.2,y:2.55,w:1.9,h:1.15,size:36,color:P.op,align:'center',valign:'middle'};
+      s.title={x:3.5,y:2.35,w:9,h:.95,size:36,color:P.tx,valign:'middle'};
+      s.sub={x:3.5,y:3.3,w:9,h:.6,size:17,color:P.sb,bold:false,font:'b'};
+    }else if(k==='closing'){
+      els.push(E(.85,.8,.2,.2,P.pr),E(1.15,.8,.2,.2,P.ac),E(1.45,.8,.2,.2,P.a2));
+      s.meta.y=5.8;
+    }else{
+      els.push(E(.85,.8,.18,.18,P.pr),E(1.12,.8,.18,.18,P.ac),E(1.39,.8,.18,.18,P.a2));
+      s.title={...s.title,x:.95,y:1.05,h:.8,size:26};s.body={x:.95,y:2.05,w:11.43,h:4.65};
+      s.page={...s.page,x:11.3,y:6.55};
+    }
+    return {...s,els};
+  },
+};
+const STYLE_LABEL={minimal:'ミニマル',band:'バンド',circles:'サークル',split:'スプリット',tech:'テック',pop:'ポップ',corporate:'コーポレート',wa:'和',diagonal:'ダイアゴナル',editorial:'エディトリアル',frame:'フレーム',card:'カード'};
+
+/* =========================================================
+   用途別サンプル文面
+   ========================================================= */
+const CONTENT = {
+'企画書':{
+ cover:['新サービス企画書','スマートな体験で、地域の毎日を変える'],
+ agenda:['背景と課題','提案の概要','ターゲットと提供価値','実施スケジュール','予算と期待効果'],
+ section:['提案の概要','課題をどう解決するか'],
+ bullets:{title:'現状の課題',lead:'利用者の不便は「情報」と「手間」に集中している',items:['必要な情報が複数の場所に分散している','手続きに時間がかかり、途中離脱が多い','利用状況をデータで把握できていない']},
+ twocol:{title:'提案するサービス',head:'ワンストップで完結する体験',text:'検索・予約・決済を1つの画面にまとめ、利用者の手間を最小限にします。\n\nデータを可視化し、改善サイクルを継続的に回せる仕組みを構築します。'},
+ kpi:{title:'期待される効果',items:[['30%','手続き時間の削減','現行フロー比'],['2.5倍','オンライン利用率','導入1年後の目標'],['1,200万','年間コスト削減（円）','人件費・印刷費']]},
+ timeline:{title:'実施スケジュール',steps:[['4月','要件定義'],['6月','開発・検証'],['9月','試験運用'],['12月','本格展開']]},
+ compare:{title:'3つの提案プラン',cols:[['ライト','最小構成で素早く開始。初期費用を抑えたい場合に。'],['スタンダード','主要機能をすべて搭載。最もバランスの良い推奨案。'],['プレミアム','分析・連携機能まで網羅。全社展開を見据えた構成。']]},
+ chart:{title:'市場規模の推移（億円）',labels:['2022','2023','2024','2025','2026'],values:[120,145,180,220,265],insight:'市場は年平均20%で成長。早期参入で優位なポジションを確保できる。'},
+ table:{title:'予算概要',rows:[['項目','初年度','2年目','備考'],['開発費','800万円','200万円','保守含む'],['運用費','300万円','350万円','クラウド'],['広報費','150万円','100万円','Web中心'],['合計','1,250万円','650万円','—']]},
+ closing:['ご清聴ありがとうございました','ご質問・ご相談をお待ちしております'],
+},
+'事業報告':{
+ cover:['2026年度 上期 事業報告','実績の振り返りと下期の重点施策'],
+ agenda:['上期のハイライト','主要KPIの実績','部門別の取り組み','課題と対策','下期の重点施策'],
+ section:['主要KPIの実績','数字で見る上期'],
+ bullets:{title:'上期のハイライト',lead:'計画を上回るペースで推移',items:['売上高は前年同期比112%で着地','新規顧客数が過去最高を更新','業務効率化により残業時間を15%削減']},
+ twocol:{title:'注力した取り組み',head:'顧客接点のデジタル化',text:'問い合わせ窓口をオンライン化し、24時間対応を実現しました。\n\n対応履歴を一元管理することで、品質のばらつきを抑えています。'},
+ kpi:{title:'主要KPI',items:[['112%','売上高 前年比','計画比 104%'],['1,850','新規顧客数','前年 +320'],['4.6','顧客満足度','5点満点']]},
+ timeline:{title:'上期の歩み',steps:[['4月','新体制スタート'],['5月','新サービス公開'],['7月','拠点リニューアル'],['9月','上期目標達成']]},
+ compare:{title:'部門別の取り組み',cols:[['営業部','既存顧客の深耕と、紹介経由の新規開拓を推進。'],['企画部','新サービスの立ち上げと、データ分析基盤の整備。'],['管理部','業務プロセスの見直しと、ペーパーレス化の推進。']]},
+ chart:{title:'月別売上高（百万円）',labels:['4月','5月','6月','7月','8月','9月'],values:[82,88,95,91,104,112],insight:'夏以降に伸びが加速。新サービスの寄与が大きい。'},
+ table:{title:'実績サマリー（百万円）',rows:[['指標','計画','実績','達成率'],['売上高','560','572','102%'],['営業利益','48','53','110%'],['新規顧客数','1,600','1,850','116%'],['解約率','3.0%','2.4%','—']]},
+ closing:['ありがとうございました','下期も引き続きよろしくお願いいたします'],
+},
+'ピッチ資料':{
+ cover:['Startup Pitch Deck','データで、まちの移動をもっと自由に'],
+ agenda:['解決する課題','プロダクト','市場機会','ビジネスモデル','チームと資金計画'],
+ section:['プロダクト','私たちがつくるもの'],
+ bullets:{title:'解決する課題',lead:'移動の「わからない」が機会損失を生んでいる',items:['経路・時刻・混雑の情報がバラバラ','事業者側も需要をつかめていない','結果として利用が伸びず、路線が縮小']},
+ twocol:{title:'プロダクト',head:'需要と供給をつなぐプラットフォーム',text:'利用者には最適な移動手段を提案し、事業者には需要予測データを提供します。\n\n双方の価値を高めるマーケットプレイスを構築します。'},
+ kpi:{title:'トラクション',items:[['50K','月間アクティブユーザー','前月比 +18%'],['12社','導入事業者','うち3社が有償'],['92%','継続利用率','90日後']]},
+ timeline:{title:'ロードマップ',steps:[['2026','β版リリース'],['2027','5都市へ展開'],['2028','全国展開'],['2029','海外進出']]},
+ compare:{title:'ビジネスモデル',cols:[['フリー','利用者向けアプリは無料。広告で収益化。'],['プロ','事業者向けSaaS。月額課金モデル。'],['データ','需要予測データのライセンス提供。']]},
+ chart:{title:'売上計画（百万円）',labels:['FY26','FY27','FY28','FY29','FY30'],values:[30,120,380,820,1500],insight:'3年でARR10億円規模へ。事業者課金が成長を牽引する。'},
+ table:{title:'資金調達計画',rows:[['項目','金額','比率','用途'],['開発','1.2億円','40%','エンジニア採用'],['営業','0.9億円','30%','事業者開拓'],['マーケ','0.6億円','20%','ユーザー獲得'],['その他','0.3億円','10%','運転資金']]},
+ closing:['Let’s move together.','一緒に未来の移動をつくりませんか'],
+},
+'研修・教育':{
+ cover:['新入社員研修','社会人としての基礎を身につけよう'],
+ agenda:['研修のねらい','ビジネスマナー','報連相の基本','情報セキュリティ','まとめとワーク'],
+ section:['報連相の基本','仕事をスムーズに進めるために'],
+ bullets:{title:'研修のねらい',lead:'「自分で考え、周りと進める」力を育てる',items:['社会人としての基本行動を理解する','チームで成果を出すコミュニケーションを学ぶ','現場で迷ったときの判断軸を持つ']},
+ twocol:{title:'報告のポイント',head:'結論から、簡潔に',text:'まず結論を伝え、次に理由と経緯を説明しましょう。\n\n悪い報告ほど早く。迷ったら、まず相談を。'},
+ kpi:{title:'覚えておきたい数字',items:[['3つ','報告の要点','多くても3点に絞る'],['24h','返信の目安','遅れるときは一報'],['5分前','集合時間','余裕をもって行動']]},
+ timeline:{title:'研修スケジュール',steps:[['1日目','オリエンテーション'],['2日目','ビジネスマナー'],['3日目','部署見学'],['4日目','グループワーク']]},
+ compare:{title:'報・連・相の違い',cols:[['報告','指示を受けた仕事の経過や結果を伝える。'],['連絡','関係者に事実や予定を共有する。'],['相談','判断に迷うときに意見や助言をもらう。']]},
+ chart:{title:'研修後の理解度（%）',labels:['マナー','報連相','PC操作','セキュリティ'],values:[88,82,91,76],insight:'セキュリティ分野はフォローアップ研修を予定。'},
+ table:{title:'持ち物チェックリスト',rows:[['項目','内容','必須','備考'],['筆記用具','ペン・ノート','○','—'],['社員証','入館時に使用','○','首から下げる'],['PC','貸与端末','○','充電器も'],['名刺','配布済み','△','2日目以降']]},
+ closing:['おつかれさまでした','学んだことを明日から実践しましょう'],
+},
+'マーケティング':{
+ cover:['マーケティング戦略 2027','ブランド認知から、選ばれる理由へ'],
+ agenda:['市場とターゲット','ブランドポジション','施策の全体像','KPIと予算','実行スケジュール'],
+ section:['施策の全体像','認知・興味・行動をつなぐ'],
+ bullets:{title:'ターゲット像',lead:'30〜40代の共働き世帯が中心',items:['平日は時間に余裕がなく、効率を重視','情報収集はSNSと口コミが中心','価格よりも「安心感」で選ぶ傾向']},
+ twocol:{title:'キャンペーン案',head:'“毎日がちょっとラクになる”',text:'SNSでの体験談投稿キャンペーンと、店頭での体験イベントを連動させます。\n\nオンラインとオフラインの接点を一つの物語でつなぎます。'},
+ kpi:{title:'KPI目標',items:[['200万','SNSインプレッション','月間'],['3.5%','エンゲージメント率','現状 2.1%'],['+40%','サイト流入数','前年比']]},
+ timeline:{title:'実行スケジュール',steps:[['1月','ティザー公開'],['2月','キャンペーン開始'],['3月','店頭イベント'],['4月','効果検証']]},
+ compare:{title:'チャネル別の役割',cols:[['SNS','認知拡大と共感の獲得。'],['Webサイト','比較検討と詳細情報の提供。'],['店頭','体験による購入の後押し。']]},
+ chart:{title:'チャネル別流入数（千件）',labels:['SNS','検索','広告','メール','紹介'],values:[42,35,28,12,9],insight:'SNS経由が最大。検索との併用で成果が伸びる。'},
+ table:{title:'予算配分',rows:[['チャネル','予算','構成比','主なKPI'],['SNS広告','400万円','40%','インプレッション'],['検索広告','250万円','25%','クリック数'],['イベント','200万円','20%','来場者数'],['制作費','150万円','15%','—']]},
+ closing:['Thank you','一緒にブランドを育てていきましょう'],
+},
+'会社説明・採用':{
+ cover:['会社説明会','地域の「当たり前」を支える仕事'],
+ agenda:['会社紹介','事業内容','働く環境','キャリアパス','選考フロー'],
+ section:['働く環境','私たちの毎日'],
+ bullets:{title:'私たちが大切にしていること',lead:'安全・安心を、いつもの毎日に',items:['お客さまの安全を最優先に考える','地域とともに歩み、信頼を積み重ねる','変化を恐れず、新しいことに挑戦する']},
+ twocol:{title:'事業内容',head:'まちの暮らしを支えるインフラ',text:'私たちは地域の暮らしに欠かせないサービスを提供しています。\n\nデジタル技術も取り入れながら、より便利な仕組みづくりに挑戦中です。'},
+ kpi:{title:'数字で見る会社',items:[['80年','創業からの歩み','地域とともに'],['2,000名','従業員数','グループ全体'],['95%','有給取得率','2025年度']]},
+ timeline:{title:'キャリアパス',steps:[['1年目','基礎研修・現場経験'],['3年目','担当業務をリード'],['5年目','プロジェクト推進'],['10年目','マネジメント']]},
+ compare:{title:'募集職種',cols:[['総合職','企画・管理部門で会社の未来を描く。'],['技術職','設備・システムを支えるスペシャリスト。'],['現業職','お客さまと直接向き合う最前線。']]},
+ chart:{title:'職種別の採用予定数（名）',labels:['総合職','技術職','現業職','専門職'],values:[12,8,40,5],insight:'現業職を中心に、幅広く仲間を募集しています。'},
+ table:{title:'選考フロー',rows:[['ステップ','内容','時期','形式'],['エントリー','Webフォーム','3月〜','オンライン'],['説明会','会社説明・質疑','3〜4月','対面/Web'],['面接','2回実施','4〜5月','対面'],['内定','条件提示','6月','—']]},
+ closing:['エントリーをお待ちしています','ご質問はお気軽に採用担当まで'],
+},
+'セミナー・講演':{
+ cover:['データ活用セミナー','明日から使える、現場のための分析入門'],
+ agenda:['自己紹介','なぜデータ活用なのか','分析の基本ステップ','事例紹介','質疑応答'],
+ section:['分析の基本ステップ','問いを立てることから始めよう'],
+ bullets:{title:'なぜデータ活用なのか',lead:'「勘と経験」に「根拠」を足す',items:['意思決定のスピードと納得感が上がる','関係者との合意形成がしやすくなる','小さな改善を積み重ねられる']},
+ twocol:{title:'事例紹介',head:'利用データから見えた改善点',text:'時間帯別の利用状況を可視化したところ、想定と異なるピークが見つかりました。\n\n配置を見直した結果、待ち時間を大幅に短縮できました。'},
+ kpi:{title:'事例の成果',items:[['-25%','平均待ち時間','改善前比'],['+12%','利用者数','3か月後'],['2週間','分析期間','少人数で実施']]},
+ timeline:{title:'分析の4ステップ',steps:[['STEP 1','問いを立てる'],['STEP 2','データを集める'],['STEP 3','可視化する'],['STEP 4','打ち手を決める']]},
+ compare:{title:'よく使う3つのグラフ',cols:[['棒グラフ','項目どうしの大きさを比べる。'],['折れ線グラフ','時間による変化を見る。'],['散布図','2つの指標の関係を見る。']]},
+ chart:{title:'時間帯別の利用者数（人）',labels:['6時','8時','10時','12時','14時','16時','18時'],values:[30,95,40,55,38,62,88],insight:'朝夕の2つのピークが明確。昼の山は想定外の発見。'},
+ table:{title:'参考ツール',rows:[['ツール','用途','難易度','費用'],['Excel','集計・グラフ','★','既存'],['BIツール','ダッシュボード','★★','月額'],['Python','高度な分析','★★★','無料'],['生成AI','分析の補助','★','月額']]},
+ closing:['ご清聴ありがとうございました','資料は後日共有いたします'],
+},
+'プロジェクト計画':{
+ cover:['プロジェクト計画書','業務システム刷新プロジェクト'],
+ agenda:['プロジェクトの目的','スコープ','体制と役割','スケジュール','リスクと対策'],
+ section:['スケジュール','マイルストーンと進め方'],
+ bullets:{title:'プロジェクトの目的',lead:'老朽化したシステムを刷新し、業務を標準化する',items:['保守期限切れによるリスクを解消する','手作業の多い業務を自動化する','データを一元管理し、分析に活用する']},
+ twocol:{title:'スコープ',head:'対象範囲を明確にする',text:'対象：受付・販売・集計の3業務\n対象外：会計システム本体\n\n段階的に移行し、業務への影響を最小限に抑えます。'},
+ kpi:{title:'目標指標',items:[['50%','手作業の削減','月間作業時間'],['0件','重大障害','移行期間中'],['3か月','移行期間','並行稼働含む']]},
+ timeline:{title:'マイルストーン',steps:[['Q1','要件定義'],['Q2','設計・開発'],['Q3','テスト・研修'],['Q4','本番移行']]},
+ compare:{title:'体制と役割',cols:[['推進チーム','全体管理と意思決定の支援。'],['業務チーム','要件の整理と受入テスト。'],['ベンダー','設計・開発と移行作業。']]},
+ chart:{title:'工程別の工数見積（人月）',labels:['要件定義','設計','開発','テスト','移行'],values:[6,10,24,14,5],insight:'開発工程が全体の約4割。早期のテスト計画が重要。'},
+ table:{title:'リスクと対策',rows:[['リスク','影響','確率','対策'],['要件の追加','大','中','変更管理の徹底'],['データ移行不備','大','低','リハーサル2回'],['利用者の混乱','中','中','事前研修・FAQ'],['人員不足','中','低','外部支援の確保']]},
+ closing:['ご確認ありがとうございました','ご意見・ご承認をお願いいたします'],
+},
+};
+const CATS = Object.keys(CONTENT);
+
+/* =========================================================
+   テンプレート定義
+   ========================================================= */
+const TEMPLATES = [
+ ['クリアミニマル','企画書','minimal','navy','gothic',['シンプル','ビジネス']],
+ ['コーポレートブルー','事業報告','corporate','navy','meiryo',['ビジネス']],
+ ['サークルモダン','マーケティング','circles','sky','gothic',['モダン']],
+ ['ナイトテック','ピッチ資料','tech','midnight','gothic',['ダーク','モダン']],
+ ['ポップキャンディ','研修・教育','pop','sakura','ud',['ポップ','かわいい']],
+ ['和紅','セミナー・講演','wa','beni','mincho',['和風','エレガント']],
+ ['スプリットグリーン','会社説明・採用','split','forest','gothic',['モダン','ビジネス']],
+ ['エディトリアル','セミナー・講演','editorial','mono','mincho',['エレガント','シンプル']],
+ ['ダイアゴナル','ピッチ資料','diagonal','sunset','gothic',['モダン','ポップ']],
+ ['シャンパンフレーム','企画書','frame','champagne','mincho',['エレガント']],
+ ['パステルカード','研修・教育','card','mint','ud',['かわいい','シンプル']],
+ ['バンドグリーン','プロジェクト計画','band','forest','meiryo',['ビジネス']],
+ ['ネオンピッチ','ピッチ資料','tech','neon','gothic',['ダーク','ポップ']],
+ ['ラベンダーサークル','マーケティング','circles','lavender','gothic',['モダン','かわいい']],
+ ['藍','会社説明・採用','wa','ai','mincho',['和風']],
+ ['モカミニマル','セミナー・講演','minimal','mocha','gothic',['シンプル','ナチュラル']],
+ ['サンセットバンド','マーケティング','band','sunset','gothic',['ビジネス','ポップ']],
+ ['モノクロフレーム','プロジェクト計画','frame','mono','gothic',['シンプル']],
+ ['レモンポップ','研修・教育','pop','lemon','ud',['ポップ']],
+ ['クリムゾンコーポ','事業報告','corporate','crimson','meiryo',['ビジネス']],
+ ['シャンパンエディトリアル','企画書','editorial','champagne','mincho',['エレガント']],
+ ['スカイカード','プロジェクト計画','card','sky','ud',['シンプル','かわいい']],
+ ['ミッドナイトスプリット','事業報告','split','midnight','gothic',['ダーク','モダン']],
+ ['ラベンダーダイアゴナル','会社説明・採用','diagonal','lavender','gothic',['モダン']],
+ ['ミントミニマル','プロジェクト計画','minimal','mint','gothic',['シンプル']],
+ ['さくらカード','会社説明・採用','card','sakura','ud',['かわいい']],
+ ['フォレストエディトリアル','事業報告','editorial','forest','mincho',['エレガント','ナチュラル']],
+ ['ネイビーダイアゴナル','企画書','diagonal','navy','gothic',['ビジネス','モダン']],
+ ['モカフレーム','セミナー・講演','frame','mocha','mincho',['ナチュラル','エレガント']],
+ ['スカイポップ','ピッチ資料','pop','sky','ud',['ポップ']],
+ ['ネオンサークル','マーケティング','circles','neon','gothic',['ダーク','ポップ']],
+ ['クリムゾンスプリット','ピッチ資料','split','crimson','gothic',['モダン']],
+ ['モノクロコーポ','プロジェクト計画','corporate','mono','meiryo',['ビジネス','シンプル']],
+ ['和紅バンド','事業報告','band','beni','mincho',['和風','ビジネス']],
+ ['ミッドナイトミニマル','セミナー・講演','minimal','midnight','gothic',['ダーク','シンプル']],
+ ['レモンカード','マーケティング','card','lemon','ud',['かわいい','ナチュラル']],
+ ['サンセットフレーム','研修・教育','frame','sunset','ud',['ポップ']],
+ ['ラベンダーエディトリアル','研修・教育','editorial','lavender','mincho',['エレガント']],
+ ['ミントダイアゴナル','会社説明・採用','diagonal','mint','gothic',['モダン']],
+ ['モカコーポ','企画書','corporate','mocha','meiryo',['ビジネス','ナチュラル']],
+].map((a,i)=>({id:'t'+(i+1),rank:i,name:a[0],cat:a[1],style:a[2],pal:a[3],font:a[4],tastes:a[5]}));
+const TASTES = ['シンプル','ビジネス','モダン','ポップ','かわいい','エレガント','和風','ダーク','ナチュラル'];
+
+/* =========================================================
+   スライド構築：テンプレート × 種別 → 要素リスト
+   ========================================================= */
+function buildSlide(tpl, kind, o){
+  const P = PALETTES[o.pal || tpl.pal];
+  const S = STYLES[tpl.style](kind, P);
+  const C = CONTENT[tpl.cat];
+  const els = [...S.els];
+  const r = S.r;
+  const page = o.page || 1;
+
+  if(kind==='cover'){
+    els.push(S2T(S.title, o.title ?? C.cover[0]), S2T(S.sub, o.sub ?? C.cover[1]));
+    const m=[o.meta ?? '株式会社サンプル', o.date ?? ''].filter(Boolean).join('　');
+    if(m) els.push(S2T(S.meta, m));
+  }
+  else if(kind==='closing'){
+    els.push(S2T(S.title, C.closing[0]), S2T(S.sub, C.closing[1]));
+    const m=o.meta ?? '株式会社サンプル'; if(m) els.push(S2T(S.meta, m));
+  }
+  else if(kind==='section'){
+    els.push(S2T(S.num, S.numText ? S.numText(2) : '02'), S2T(S.title, C.section[0]), S2T(S.sub, C.section[1]));
+  }
+  else{
+    const B = S.body;
+    if(S.label) els.push(T(S.title.x, .18, 6, .32, '// '+String(page).padStart(2,'0'), {size:10,color:P.ac,bold:true}));
+    els.push(S2T(S.title, kind==='agenda' ? 'AGENDA　目次' : C[kind].title));
+    if(S.footer && (o.meta ?? '株式会社サンプル')) els.push(T(.7,7.05,8,.45,o.meta ?? '株式会社サンプル',{size:10,color:P.op,valign:'middle'}));
+    els.push(S2T(S.page, S.pageFmt ? S.pageFmt(page) : String(page)));
+    els.push(...LAYOUTS[kind](B, P, C, r));
+  }
+  return {bg:P.bg, els, P};
+}
+
+const LAYOUTS = {
+  agenda(B,P,C,r){
+    const a=[],n=C.agenda.length,rh=Math.min(.95,B.h/n);
+    C.agenda.forEach((t,i)=>{
+      const y=B.y+i*rh;
+      a.push(R(B.x,y+.14,.8,rh-.28,P.pr,{r:Math.min(r,.2)}));
+      a.push(T(B.x,y+.14,.8,rh-.28,String(i+1).padStart(2,'0'),{size:18,bold:true,color:P.op,align:'center',valign:'middle',font:'h'}));
+      a.push(T(B.x+1.15,y,B.w-1.15,rh,t,{size:20,color:P.tx,valign:'middle'}));
+      a.push(R(B.x+1.15,y+rh-.012,B.w-1.15,.012,P.a2));
+    });
+    return a;
+  },
+  bullets(B,P,C,r){
+    const a=[],d=C.bullets,lw=4.3;
+    a.push(R(B.x,B.y,lw,B.h,P.pr,{r}));
+    a.push(T(B.x+.45,B.y+.4,lw-.9,B.h-.8,d.lead,{size:24,bold:true,color:P.op,valign:'middle',font:'h'}));
+    const x0=B.x+lw+.45,w=B.w-lw-.45,n=d.items.length,ih=B.h/n;
+    d.items.forEach((t,i)=>{
+      const y=B.y+i*ih;
+      a.push(R(x0,y+.08,w,ih-.16,P.sf,{r}));
+      a.push(E(x0+.4,y+ih/2-.15,.3,.3,P.ac));
+      a.push(T(x0+1,y,w-1.25,ih,t,{size:18,color:P.tx,valign:'middle'}));
+    });
+    return a;
+  },
+  twocol(B,P,C,r){
+    const a=[],d=C.twocol,lw=B.w*.46;
+    a.push(T(B.x,B.y+.15,lw,1,d.head,{size:24,bold:true,color:P.pr,font:'h',valign:'bottom'}));
+    a.push(R(B.x,B.y+1.35,.6,.05,P.ac));
+    a.push(T(B.x,B.y+1.7,lw,B.h-1.8,d.text,{size:16,color:P.tx}));
+    const x=B.x+lw+.5,w=B.w-lw-.5;
+    a.push(R(x,B.y,w,B.h,P.sf,{r,line:P.a2,lw:1.25,dash:true}));
+    a.push(T(x,B.y,w,B.h,'画像を配置',{size:14,color:P.sb,align:'center',valign:'middle'}));
+    return a;
+  },
+  kpi(B,P,C,r){
+    const a=[],g=.4,cw=(B.w-2*g)/3,ch=Math.min(3.9,B.h-.7),y=B.y+(B.h-ch)/2;
+    C.kpi.items.forEach((it,i)=>{
+      const x=B.x+i*(cw+g);
+      a.push(R(x,y,cw,ch,P.sf,{r}));
+      a.push(R(x+.45,y+.5,.8,.07,P.pr));
+      a.push(T(x+.45,y+.75,cw-.9,1.45,it[0],{size:50,bold:true,color:P.pr,font:'h',valign:'middle'}));
+      a.push(T(x+.45,y+2.3,cw-.9,.55,it[1],{size:18,bold:true,color:P.tx}));
+      a.push(T(x+.45,y+2.9,cw-.9,.5,it[2],{size:13,color:P.sb}));
+    });
+    return a;
+  },
+  timeline(B,P,C,r){
+    const a=[],st=C.timeline.steps,n=st.length,seg=B.w/n,ly=B.y+1.9;
+    a.push(R(B.x,ly-.03,B.w,.06,P.a2));
+    st.forEach((s,i)=>{
+      const cx=B.x+seg*i+seg/2;
+      a.push(T(cx-seg/2+.1,ly-1.3,seg-.2,.9,s[0],{size:22,bold:true,color:P.pr,align:'center',valign:'bottom',font:'h'}));
+      a.push(E(cx-.22,ly-.22,.44,.44,P.pr,{line:P.bg,lw:3}));
+      a.push(R(cx-seg/2+.15,ly+.6,seg-.3,1.9,P.sf,{r}));
+      a.push(T(cx-seg/2+.3,ly+.6,seg-.6,1.9,s[1],{size:17,color:P.tx,align:'center',valign:'middle'}));
+    });
+    return a;
+  },
+  compare(B,P,C,r){
+    const a=[],g=.35,cw=(B.w-2*g)/3,y=B.y+.25,hh=.85,bh=Math.min(3.7,B.h-1.4),rr=Math.min(r,.08);
+    C.compare.cols.forEach((c,i)=>{
+      const x=B.x+i*(cw+g);
+      a.push(R(x,y,cw,hh,i===1?P.ac:P.pr,{r:rr}));
+      a.push(T(x,y,cw,hh,c[0],{size:20,bold:true,color:i===1?(PALETTES_DARK(P)?P.bg:'FFFFFF'):P.op,align:'center',valign:'middle',font:'h'}));
+      a.push(R(x,y+hh+.1,cw,bh,P.sf,{r:rr}));
+      a.push(T(x+.4,y+hh+.45,cw-.8,bh-.7,c[1],{size:16,color:P.tx}));
+    });
+    return a;
+  },
+  chart(B,P,C,r){
+    const a=[],d=C.chart,cw=7.6;
+    a.push({t:'chart',x:B.x,y:B.y,w:cw,h:B.h,labels:d.labels,values:d.values,color:P.pr,lc:P.sb,vc:P.tx,ax:P.a2});
+    const x=B.x+cw+.5,w=B.w-cw-.5;
+    a.push(R(x,B.y+.3,w,B.h-.6,P.sf,{r}));
+    a.push(T(x+.45,B.y+.75,w-.9,.45,'POINT',{size:14,bold:true,color:P.ac,font:'h'}));
+    a.push(R(x+.45,B.y+1.25,.5,.04,P.ac));
+    a.push(T(x+.45,B.y+1.5,w-.9,B.h-2.2,d.insight,{size:18,color:P.tx}));
+    return a;
+  },
+  table(B,P,C,r){
+    const rows=C.table.rows,rh=Math.min(.78,(B.h-.3)/rows.length);
+    return [{t:'table',x:B.x,y:B.y+.15,w:B.w,rh,rows,P}];
+  },
+};
+const PALETTES_DARK = P => parseInt(P.bg.slice(0,2),16) < 0x60;
+
+/* =========================================================
+   DOMレンダラー（プレビュー）
+   ========================================================= */
+const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const col = (c,alpha) => alpha ? '#'+c+Math.round((100-alpha)/100*255).toString(16).padStart(2,'0') : '#'+c;
+const pct = (e) => `left:${e.x/W*100}%;top:${e.y/H*100}%;width:${e.w/W*100}%;height:${e.h/H*100}%;`;
+
+function renderHTML(sd, fs){
+  const F = FONT_SETS[fs];
+  const ff = k => FONTS[k==='h'?F.h:F.b].css.replace(/"/g,"'");
+  let h='';
+  for(const e of sd.els){
+    const rot = e.rot ? `transform:rotate(${e.rot}deg);` : '';
+    if(e.t==='rect'||e.t==='ellipse'){
+      const bg = e.fill ? col(e.fill,e.alpha) : 'transparent';
+      const br = e.t==='ellipse' ? '50%' : (e.r ? `${Math.min(e.r,Math.min(e.w,e.h)/2)/W*100}cqw` : '0');
+      const bd = e.line ? `border:${(e.lw||1)*PT}cqw ${e.dash?'dashed':'solid'} #${e.line};` : '';
+      h+=`<div class="el" style="${pct(e)}${rot}background:${bg};border-radius:${br};${bd}"></div>`;
+    }else if(e.t==='text'){
+      const jc = {top:'flex-start',middle:'center',bottom:'flex-end'}[e.valign||'top'];
+      const lines = String(e.text).split('\n').map(l=>`<span>${l?esc(l):'&nbsp;'}</span>`).join('');
+      h+=`<div class="el tx" style="${pct(e)}${rot}font-family:${ff(e.font)};font-size:${e.size*PT}cqw;color:#${e.color};font-weight:${e.bold?700:400};text-align:${e.align};justify-content:${jc}">${lines}</div>`;
+    }else if(e.t==='chart'){
+      h+=chartHTML(e, ff('b'));
+    }else if(e.t==='table'){
+      h+=tableHTML(e, ff('b'), ff('h'));
+    }
+  }
+  return `<div class="slide" style="background:#${sd.bg}">${h}</div>`;
+}
+function chartHTML(e, font){
+  const n=e.values.length,max=Math.max(...e.values)*1.18,slot=e.w/n,bw=slot/1.6,top=.35,bot=.55,ph=e.h-top-bot;
+  let h=`<div class="el" style="${pct({x:e.x,y:e.y+top+ph,w:e.w,h:.012})}background:#${e.ax}"></div>`;
+  e.values.forEach((v,i)=>{
+    const bh=ph*v/max,x=e.x+slot*i+(slot-bw)/2,y=e.y+top+ph-bh;
+    h+=`<div class="el" style="${pct({x,y,w:bw,h:bh})}background:#${e.color}"></div>`;
+    h+=`<div class="el tx" style="${pct({x:x-.3,y:y-.38,w:bw+.6,h:.34})}font-family:${font};font-size:${12*PT}cqw;color:#${e.vc};text-align:center;justify-content:flex-end"><span>${v.toLocaleString()}</span></div>`;
+    h+=`<div class="el tx" style="${pct({x:e.x+slot*i,y:e.y+top+ph+.1,w:slot,h:.4})}font-family:${font};font-size:${12*PT}cqw;color:#${e.lc};text-align:center"><span>${esc(e.labels[i])}</span></div>`;
+  });
+  return h;
+}
+function tableHTML(e, font, hfont){
+  const P=e.P,cols=e.rows[0].length,cw=e.w/cols;let h='';
+  e.rows.forEach((row,ri)=>row.forEach((c,ci)=>{
+    const head=ri===0,bg=head?P.pr:(ri%2?P.bg:P.sf),fg=head?P.op:P.tx;
+    h+=`<div class="el tx" style="${pct({x:e.x+ci*cw,y:e.y+ri*e.rh,w:cw,h:e.rh})}background:#${bg};border:${.75*PT}cqw solid #${P.a2};font-family:${head?hfont:font};font-size:${14*PT}cqw;color:#${fg};font-weight:${head?700:400};text-align:center;justify-content:center"><span>${esc(c)}</span></div>`;
+  }));
+  return h;
+}
+
+/* =========================================================
+   PPTXエクスポート（pptxgenjs）
+   ========================================================= */
+function addToSlide(pres, s, e, fs, P){
+  const F=FONT_SETS[fs];
+  const face=k=>FONTS[k==='h'?F.h:F.b].ppt;
+  const box={x:e.x,y:e.y,w:e.w,h:e.h};
+  if(e.rot) box.rotate=e.rot;
+  if(e.t==='rect'||e.t==='ellipse'){
+    const shape = e.t==='ellipse' ? pres.ShapeType.ellipse : (e.r ? pres.ShapeType.roundRect : pres.ShapeType.rect);
+    const o={...box};
+    if(e.fill) o.fill={color:e.fill,transparency:e.alpha||0};
+    if(e.line) o.line={color:e.line,width:e.lw||1,dashType:e.dash?'dash':'solid'};
+    if(e.r && e.t==='rect') o.rectRadius=Math.min(e.r,Math.min(e.w,e.h)/2);
+    s.addShape(shape,o);
+  }else if(e.t==='text'){
+    s.addText(e.text,{...box,fontFace:face(e.font),fontSize:e.size,color:e.color,bold:!!e.bold,align:e.align||'left',valign:e.valign||'top',margin:0,lineSpacingMultiple:1.05,fit:'none',wrap:true});
+  }else if(e.t==='chart'){
+    s.addChart(pres.ChartType.bar,[{name:'系列1',labels:e.labels,values:e.values}],{
+      ...box,barDir:'col',chartColors:[e.color],barGapWidthPct:60,showLegend:false,
+      showValue:true,dataLabelPosition:'outEnd',dataLabelColor:e.vc,dataLabelFontSize:12,dataLabelFontFace:face('b'),
+      catAxisLabelColor:e.lc,catAxisLabelFontSize:12,catAxisLabelFontFace:face('b'),catAxisLineShow:true,catAxisLineColor:e.ax,
+      valAxisHidden:true,valGridLine:{style:'none'},valAxisMinVal:0,
+    });
+  }else if(e.t==='table'){
+    const P2=e.P;
+    const rows=e.rows.map((row,ri)=>row.map(c=>({text:c,options:ri===0
+      ?{fill:{color:P2.pr},color:P2.op,bold:true,fontFace:face('h')}
+      :{fill:{color:ri%2?P2.bg:P2.sf},color:P2.tx}})));
+    s.addTable(rows,{x:e.x,y:e.y,w:e.w,colW:Array(e.rows[0].length).fill(e.w/e.rows[0].length),rowH:e.rh,
+      fontFace:face('b'),fontSize:14,align:'center',valign:'middle',border:{type:'solid',pt:.75,color:P2.a2}});
+  }
+}
+async function exportPptx(tpl, st){
+  const pres = new PptxGenJS();
+  pres.layout = 'LAYOUT_WIDE';
+  pres.title = st.title || tpl.name;
+  pres.company = st.meta || '';
+  const F=FONT_SETS[st.font];
+  pres.theme = {headFontFace:FONTS[F.h].ppt, bodyFontFace:FONTS[F.b].ppt};
+  let page=0;
+  for(const [kind,label] of KINDS){
+    page++;
+    if(!st.sel.has(kind)) continue;
+    const sd = buildSlide(tpl, kind, {...st, page});
+    const s = pres.addSlide();
+    s.background = {color:sd.bg};
+    for(const e of sd.els) addToSlide(pres, s, e, st.font, sd.P);
+    s.addNotes(`【${label}】ここに発表者メモを入力します。`);
+  }
+  const fn = (st.title || tpl.name).replace(/[\\/:*?"<>|]/g,'_').slice(0,60);
+  await pres.writeFile({fileName:`${fn}.pptx`});
+}
+
+/* =========================================================
+   ギャラリーUI
+   ========================================================= */
+const $ = s => document.querySelector(s);
+const state = {q:'',cat:'すべて',taste:null,color:null,favOnly:false,sort:'rec'};
+let favs = new Set();
+try{ favs = new Set(JSON.parse(localStorage.getItem('slide-katarogu-favs')||'[]')) }catch(e){}
+const saveFavs = () => { try{ localStorage.setItem('slide-katarogu-favs',JSON.stringify([...favs])) }catch(e){} $('#favCount').textContent=favs.size };
+
+function chips(){
+  const cr=$('#catRow'),tr=$('#tasteRow'),kr=$('#colorRow');
+  ['すべて',...CATS].forEach(c=>{const b=document.createElement('button');b.className='chip'+(c===state.cat?' on':'');b.textContent=c;b.onclick=()=>{state.cat=c;refreshChips();draw()};b.dataset.cat=c;cr.appendChild(b)});
+  TASTES.forEach(t=>{const b=document.createElement('button');b.className='chip';b.textContent=t;b.dataset.taste=t;b.onclick=()=>{state.taste=state.taste===t?null:t;refreshChips();draw()};tr.appendChild(b)});
+  const all=document.createElement('button');all.className='dot all on';all.title='すべて';all.dataset.color='';all.onclick=()=>{state.color=null;refreshChips();draw()};kr.appendChild(all);
+  COLOR_GROUPS.forEach(([g,n,c])=>{const b=document.createElement('button');b.className='dot';b.style.background=c;b.title=n;b.dataset.color=g;b.onclick=()=>{state.color=state.color===g?null:g;refreshChips();draw()};kr.appendChild(b)});
+}
+function refreshChips(){
+  document.querySelectorAll('[data-cat]').forEach(b=>b.classList.toggle('on',b.dataset.cat===state.cat));
+  document.querySelectorAll('[data-taste]').forEach(b=>b.classList.toggle('on',b.dataset.taste===state.taste));
+  document.querySelectorAll('[data-color]').forEach(b=>b.classList.toggle('on',(b.dataset.color||null)===state.color));
+  $('#favOnly').classList.toggle('on',state.favOnly);
+}
+function filtered(){
+  const q=state.q.trim().toLowerCase();
+  let list=TEMPLATES.filter(t=>{
+    if(state.cat!=='すべて'&&t.cat!==state.cat)return false;
+    if(state.taste&&!t.tastes.includes(state.taste))return false;
+    if(state.color&&PALETTES[t.pal].g!==state.color)return false;
+    if(state.favOnly&&!favs.has(t.id))return false;
+    if(q){const hay=[t.name,t.cat,...t.tastes,PALETTES[t.pal].n,STYLE_LABEL[t.style]].join(' ').toLowerCase();if(!q.split(/\s+/).every(w=>hay.includes(w)))return false}
+    return true;
+  });
+  if(state.sort==='name')list.sort((a,b)=>a.name.localeCompare(b.name,'ja'));
+  else if(state.sort==='cat')list.sort((a,b)=>CATS.indexOf(a.cat)-CATS.indexOf(b.cat)||a.rank-b.rank);
+  return list;
+}
+const heartSVG='<svg viewBox="0 0 24 24" fill="none" stroke="#444" stroke-width="2"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.1 0 3.6 1.2 5.2 3 1.6-1.8 3.1-3 5.2-3 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg>';
+function draw(){
+  const g=$('#grid'),list=filtered();
+  $('#count').textContent=`${list.length}件のテンプレート`;
+  if(!list.length){g.innerHTML='<div class="empty">条件に合うテンプレートがありません。フィルタを変えてみてください。</div>';return}
+  g.innerHTML=list.map(t=>{
+    const cover=renderHTML(buildSlide(t,'cover',{}),t.font);
+    const alt=renderHTML(buildSlide(t,'kpi',{page:6}),t.font);
+    return `<article class="card" data-id="${t.id}">
+      <div class="thumb">${cover}<div class="alt">${alt}</div>
+        <button class="heart ${favs.has(t.id)?'on':''}" data-fav="${t.id}" aria-label="お気に入り">${heartSVG}</button>
+        <span class="badge">${KINDS.length}枚 ・ ${STYLE_LABEL[t.style]}</span></div>
+      <div class="meta"><div class="name">${esc(t.name)}</div>
+        <div class="tags"><span class="tag cat">${t.cat}</span>${t.tastes.map(x=>`<span class="tag">${x}</span>`).join('')}</div></div>
+    </article>`;
+  }).join('');
+}
+
+/* ---------- モーダル ---------- */
+let cur=null, st=null, idx=0;
+function openTpl(id){
+  cur=TEMPLATES.find(t=>t.id===id);
+  const C=CONTENT[cur.cat];
+  st={pal:cur.pal,font:cur.font,title:C.cover[0],sub:C.cover[1],meta:'株式会社サンプル',date:todayStr(),sel:new Set(KINDS.map(k=>k[0]))};
+  idx=0;
+  $('#mTitle').textContent=cur.name;$('#mCat').textContent=cur.cat;
+  $('#fTitle').value=st.title;$('#fSub').value=st.sub;$('#fMeta').value=st.meta;$('#fDate').value=st.date;
+  drawPals();drawFonts();drawStrip();drawBig();
+  $('#modal').classList.add('open');document.body.style.overflow='hidden';
+  try{history.replaceState(null,'','#'+id)}catch(e){}
+}
+function closeModal(){$('#modal').classList.remove('open');document.body.style.overflow='';try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}}
+function todayStr(){const d=new Date();return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`}
+function slideOf(i){return buildSlide(cur,KINDS[i][0],{...st,page:i+1})}
+function drawBig(){$('#bigSlide').innerHTML=renderHTML(slideOf(idx),st.font);document.querySelectorAll('.th').forEach((el,i)=>el.classList.toggle('cur',i===idx))}
+function drawStrip(){
+  $('#strip').innerHTML=KINDS.map(([k,l],i)=>`<div class="th ${i===idx?'cur':''} ${st.sel.has(k)?'':'off'}" data-i="${i}">${renderHTML(slideOf(i),st.font)}<label class="cap"><input type="checkbox" data-k="${k}" ${st.sel.has(k)?'checked':''}>${i+1}. ${l}</label></div>`).join('');
+  updateDl();
+}
+function drawPals(){
+  $('#pals').innerHTML=Object.entries(PALETTES).map(([k,p])=>`<button class="pal ${k===st.pal?'on':''}" data-pal="${k}" title="${p.n}"><div class="sw"><i style="background:#${p.pr}"></i><i style="background:#${p.ac}"></i><i style="background:#${p.a2}"></i><i style="background:#${p.bg};box-shadow:inset 0 0 0 1px #ddd"></i></div><span>${p.n}</span></button>`).join('');
+}
+function drawFonts(){
+  $('#fonts').innerHTML=Object.entries(FONT_SETS).map(([k,f])=>`<button class="${k===st.font?'on':''}" data-font="${k}" style="font-family:${FONTS[f.h].css.replace(/"/g,"'")}">${f.label}</button>`).join('');
+}
+function updateDl(){const n=st.sel.size;$('#dl').disabled=!n;$('#dlLabel').textContent=n?`.pptxをダウンロード（${n}枚）`:'スライドを選択してください'}
+function rerender(){drawStrip();drawBig()}
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('show'),2200)}
+
+/* ---------- イベント ---------- */
+function init(){
+  $('#stats').innerHTML=[[TEMPLATES.length,'テンプレート'],[KINDS.length,'レイアウト / 1テンプレート'],[Object.keys(PALETTES).length,'カラーパレット'],[Object.keys(FONT_SETS).length,'フォントセット']].map(([n,l])=>`<div><b>${n}</b> ${l}</div>`).join('');
+  chips();saveFavs();draw();
+  $('#q').addEventListener('input',e=>{state.q=e.target.value;draw()});
+  $('#sort').onchange=e=>{state.sort=e.target.value;draw()};
+  $('#favOnly').onclick=()=>{state.favOnly=!state.favOnly;refreshChips();draw()};
+  $('#grid').addEventListener('click',e=>{
+    const f=e.target.closest('[data-fav]');
+    if(f){e.stopPropagation();const id=f.dataset.fav;favs.has(id)?favs.delete(id):favs.add(id);f.classList.toggle('on');saveFavs();if(state.favOnly)draw();return}
+    const c=e.target.closest('.card');if(c)openTpl(c.dataset.id);
+  });
+  $('#mClose').onclick=closeModal;
+  $('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
+  $('#prev').onclick=()=>{idx=(idx-1+KINDS.length)%KINDS.length;drawBig()};
+  $('#next').onclick=()=>{idx=(idx+1)%KINDS.length;drawBig()};
+  document.addEventListener('keydown',e=>{
+    if(!$('#modal').classList.contains('open'))return;
+    if(e.target.tagName==='INPUT')return;
+    if(e.key==='Escape')closeModal();
+    if(e.key==='ArrowLeft')$('#prev').click();
+    if(e.key==='ArrowRight')$('#next').click();
+  });
+  $('#strip').addEventListener('click',e=>{
+    const cb=e.target.closest('input[type=checkbox]');
+    if(cb){const k=cb.dataset.k;cb.checked?st.sel.add(k):st.sel.delete(k);cb.closest('.th').classList.toggle('off',!cb.checked);updateDl();return}
+    if(e.target.closest('label'))return;
+    const th=e.target.closest('.th');if(th){idx=+th.dataset.i;drawBig()}
+  });
+  $('#pals').addEventListener('click',e=>{const b=e.target.closest('[data-pal]');if(!b)return;st.pal=b.dataset.pal;drawPals();rerender()});
+  $('#fonts').addEventListener('click',e=>{const b=e.target.closest('[data-font]');if(!b)return;st.font=b.dataset.font;drawFonts();rerender()});
+  let tm;
+  const bind=(id,key)=>$(id).addEventListener('input',e=>{st[key]=e.target.value;clearTimeout(tm);tm=setTimeout(rerender,120)});
+  bind('#fTitle','title');bind('#fSub','sub');bind('#fMeta','meta');bind('#fDate','date');
+  $('#selAll').onclick=()=>{st.sel=new Set(KINDS.map(k=>k[0]));drawStrip()};
+  $('#selNone').onclick=()=>{st.sel.clear();drawStrip()};
+  $('#dl').onclick=async()=>{
+    if(typeof PptxGenJS==='undefined'){toast('ライブラリを読み込めませんでした。ネット接続を確認してください');return}
+    const b=$('#dl');b.disabled=true;$('#dlLabel').textContent='作成中…';
+    try{await exportPptx(cur,st);toast('ダウンロードしました')}
+    catch(err){console.error(err);toast('作成に失敗しました：'+err.message)}
+    finally{updateDl()}
+  };
+  const h=location.hash.slice(1);if(h&&TEMPLATES.some(t=>t.id===h))openTpl(h);
+}
+init();
+</script>
+</body>
+</html>
